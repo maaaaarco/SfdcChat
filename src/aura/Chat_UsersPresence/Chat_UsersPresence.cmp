@@ -1,0 +1,102 @@
+<!--
+ - Created by mzeuli on 28.10.18.
+ - Displays a list of active users for specified chat room
+ -->
+
+<aura:component description="Chat_UsersPresence" controller="Chat_CtrUsersPresence">
+
+    <aura:registerEvent name="alert" type="c:AlertEvent" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="render" value="{!this}" action="{!c.doRender}"/>
+    <aura:handler name="change" value="{!v.searchText}" action="{!c.filterUsers}"/>
+    <aura:handler name="destroy" value="{!this}" action="{!c.doDestroy}"/>
+    <aura:handler event="aura:locationChange" action="{!c.doDestroy}"/>
+
+    <!--required-->
+    <aura:attribute name="roomId" type="String" required="true" description="Chat room id"/>
+    <aura:attribute name="popoverMaxHeight" type="Integer" required="true"
+                    description="Maximum height of the popover displaying users presences entries"/>
+
+    <!--private-->
+    <aura:attribute name="usersPresence" type="Chat_User_Presence__c[]" access="private"
+                    description="Users presence related to current chat room"/>
+    <aura:attribute name="searchText" type="String" access="private" description="Search text to filter users"/>
+    <aura:attribute name="popoverTop" type="Integer" access="private" description="Popover top position in pixel"/>
+    <aura:attribute name="popoverLeft" type="Integer" access="private" description="Popover left position in pixel"/>
+    <aura:attribute name="isPopoverOpen" type="Boolean" access="private" default="false"
+                    description="Show or hide the popover"/>
+    <aura:attribute name="togglePopoverTimeoutId" type="Integer" access="private" description="Scheduled timeout function that will toggle the popover" />
+    <aura:attribute name="filterUsersTimeoutId" type="Integer" access="private" description="Scheduled timeout function that will filter users according to search text" />
+    <aura:attribute name="intervalId" type="String" access="private"
+                    description="Interval id that refreshes user presence"/>
+
+
+    <div class="slds-grid slds-wrap slds-p-around--small">
+        <div class="slds-col slds-size--1-of-1">
+
+            <button aura:id="triggerBtn" class="slds-button slds-button_icon slds-button_icon-border-filled"
+                    title="Online users" onmousedown="{!c.togglePopover}">
+                <lightning:icon iconName="utility:people"/>
+            </button>
+
+            <aura:if isTrue="{!v.isPopoverOpen}">
+
+                <section aura:id="presenceContainer" class="slds-popover slds-dynamic-menu" role="dialog"
+                         aria-label="Online users" aria-describedby="online-user-popover"
+                         style="{!'position: absolute; z-index: 1; left: ' + v.popoverLeft + 'px; top: ' + v.popoverTop + 'px;'}">
+
+                    <div class="slds-popover__body slds-p-horizontal_none" id="online-user-popover">
+
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                                <div class="slds-combobox_container">
+                                    <div class="slds-combobox slds-is-open" aria-expanded="true" aria-haspopup="listbox"
+                                         role="combobox">
+
+                                        <lightning:spinner aura:id="spinner" variant="brand" />
+
+                                        <div aura:id="searchContainer"
+                                             class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right slds-m-around_small"
+                                             role="none">
+                                            <input aura:id="searchInput" class="slds-input slds-combobox__input"
+                                                   oninput="{!c.setSearchText}" onblur="{!c.togglePopover}"
+                                                   placeholder="Search users..."/>
+                                            <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                                              <lightning:icon iconName="utility:search" size="x-small"/>
+                                            </span>
+                                        </div>
+                                        <div id="listbox-unique-id" role="listbox">
+                                            <ul class="slds-listbox slds-listbox_vertical slds-dropdown_length-10"
+                                                style="{!'max-height: ' + v.popoverMaxHeight + 'px;'}"
+                                                role="group" aria-label="Online users">
+
+                                                <li role="presentation" class="slds-listbox__item">
+                                                    <div class="slds-media slds-listbox__option slds-listbox__option_plain"
+                                                         role="presentation">
+                                                        <h3 class="slds-text-title_caps" role="presentation">Online
+                                                            users</h3>
+                                                    </div>
+                                                </li>
+
+                                                <aura:iteration aura:id="usersPresence" items="{!v.usersPresence}" var="up">
+
+                                                    <c:Chat_SingleUserPresence userPresence="{!up}" />
+
+                                                </aura:iteration>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </aura:if>
+
+
+        </div>
+    </div>
+
+</aura:component>

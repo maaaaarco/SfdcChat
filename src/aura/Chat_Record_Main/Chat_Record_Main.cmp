@@ -1,0 +1,19 @@
+<!--
+ - Created by mzeuli on 24.10.18.
+ - Display chat on a sobject's home page
+ -->
+
+<aura:component description="Chat_Record_Main" access="global" controller="Chat_CtrRecordMain"
+                implements="flexipage:availableForRecordHome,force:hasRecordId">
+
+    <aura:registerEvent name="alert" type="c:AlertEvent" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <aura:attribute name="roomId" type="String" access="private"
+                    description="Chat room id related to current sobject record"/>
+
+    <aura:if isTrue="{!not(empty(v.roomId))}">
+        <c:Chat_Room roomId="{!v.roomId}" />
+    </aura:if>
+</aura:component>

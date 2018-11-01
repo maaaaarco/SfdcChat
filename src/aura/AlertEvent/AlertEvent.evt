@@ -1,0 +1,8 @@
+<!--
+ - Created by mzeuli on 01.11.18.
+ -->
+
+<aura:event type="APPLICATION" description="AlertEvent">
+    <aura:attribute name="message" type="String" required="true" description="Alert message" />
+    <aura:attribute name="alertType" type="String" required="true" description="What kind of alert. Should be one of error, warning, info" />
+</aura:event>

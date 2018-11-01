@@ -1,0 +1,8 @@
+<!--
+ - Created by mzeuli on 25.10.18.
+ - Fired every time a Streaming API event is captured
+ -->
+
+<aura:event type="COMPONENT" description="StreamerEvent" access="global">
+    <aura:attribute name="data" type="Map"  description="Captured streaming event" />
+</aura:event>

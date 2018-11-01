@@ -1,0 +1,41 @@
+<!--
+ - Created by mzeuli on 25.10.18.
+ - Streaming API connector
+ -->
+
+<aura:component description="Streamer" controller="CtrStreamer">
+
+    <aura:registerEvent name="newMessage" type="c:StreamerEvent"/>
+    <aura:registerEvent name="alert" type="c:AlertEvent" />
+
+    <aura:handler event="aura:locationChange" action="{!c.doDestroy}"/>
+    <aura:handler name="destroy" value="{!this}" action="{!c.doDestroy}"/>
+
+    <!--required-->
+    <aura:attribute name="channelName" type="String" required="true" description="Channel to listen to"/>
+
+    <!--optional-->
+    <aura:attribute name="isPushTopic" type="Boolean" default="false" description="True if channel is a PushTopic"/>
+
+    <aura:attribute name="isPlatformEvent" type="Boolean" default="false"
+                    description="True if channel is a Platform Event"/>
+
+    <aura:attribute name="isChangeDataCapture" type="Boolean" default="false"
+                    description="True if channel is a Change Data Capture event"/>
+
+    <aura:attribute name="debugMode" type="Boolean" default="false"
+                    description="If true enable console logging of streaming event"/>
+
+    <!--private-->
+    <aura:attribute name="connection" type="Map" access="private"
+                    description="CometD active connection"/>
+
+    <ltng:require
+            scripts="{!join(',',
+            $Resource.StreamingApiConnector2 + '/cometd/cometd.js',
+            $Resource.StreamingApiConnector2 + '/js/DHStreamingApiWrapper.js'
+        )}"
+            afterScriptsLoaded="{!c.initCometD}"/>
+
+
+</aura:component>

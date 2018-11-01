@@ -1,0 +1,44 @@
+<!--
+ - Created by mzeuli on 27.10.18.
+ - Displays form to write and send a new message
+ -->
+
+<aura:component description="Chat_SendMessage" controller="Chat_CtrSendMessage">
+
+    <aura:registerEvent name="alert" type="c:AlertEvent" />
+
+    <!--required-->
+    <aura:attribute name="roomId" type="String" required="true" description="Chat room id"/>
+
+    <!--optional-->
+    <aura:attribute name="messageMaxLength" type="Integer" default="260" description="Message maximum length"/>
+
+    <!--private-->
+    <aura:attribute name="message" type="String" default="" access="private" description="Message text"/>
+    <aura:attribute name="previousKeyCode" type="String" access="private" description="Previous pressed key, used to prevent send message when Shift+Enter is pressed"/>
+
+    <div class="slds-grid slds-p-around--small slds-wrap">
+
+        <div class="slds-col slds-size--1-of-1">
+            <div class="slds-form-element">
+                <div class="slds-form-element__control">
+                    <textarea
+                            class="slds-textarea"
+                            maxlength="{!v.messageMaxLength}"
+                            rows="3"
+                            oninput="{!c.setMessage}"
+                            onkeydown="{!c.onKeyDown}"
+                            placeholder="Your message..."></textarea>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="slds-col slds-size--1-of-1">
+            <span class="slds-float--right">
+                {!v.message.length}/{!v.messageMaxLength}
+            </span>
+        </div>
+    </div>
+
+</aura:component>

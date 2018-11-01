@@ -1,0 +1,47 @@
+<!--
+ - Created by mzeuli on 28.10.18.
+ - Loads a chat room
+ -->
+
+<aura:component description="Chat_Room" controller="Chat_CtrRoom">
+
+    <aura:registerEvent name="alert" type="c:AlertEvent" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <!--required-->
+    <aura:attribute name="roomId" type="String" required="true"
+                    description="Chat room id to load"/>
+
+    <!--optional-->
+    <aura:attribute name="chatPaneSize" type="Integer" default="300" description="Size of chat pane that displays messages. Value is in pixel" />
+
+    <!--private-->
+    <aura:attribute name="currentUser" type="User" description="Current user record" access="private" />
+
+    <!--Main grid -->
+    <div class="slds-grid slds-wrap slds-p-around--small slds-theme_default slds-box">
+
+        <aura:if isTrue="{!and(not(empty(v.roomId)), not(empty(v.currentUser)))}">
+
+            <div class="slds-col slds-size--1-of-1">
+                <c:Alert />
+            </div>
+
+            <div class="slds-col slds-size--1-of-1">
+                <c:Chat_UsersPresence roomId="{!v.roomId}" popoverMaxHeight="{!v.chatPaneSize}" />
+            </div>
+
+            <div class="slds-col slds-size--1-of-1">
+                <c:Chat_ListMessages roomId="{!v.roomId}" currentUser="{!v.currentUser}" chatPaneSize="{!v.chatPaneSize}" />
+            </div>
+
+            <div class="slds-col slds-size--1-of-1">
+                <c:Chat_SendMessage roomId="{!v.roomId}"/>
+            </div>
+
+        </aura:if>
+
+    </div>
+
+</aura:component>

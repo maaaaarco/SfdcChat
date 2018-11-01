@@ -1,0 +1,38 @@
+<!--
+ - Created by mzeuli on 29.10.18.
+ - Displays a single Chat_User_Presence__c record
+ -->
+
+<aura:component description="Chat_SingleUserPresence">
+
+    <!--required-->
+    <aura:attribute name="userPresence" type="Chat_User_Presence__c" required="true" description="Record to display" />
+
+    <!--public methods-->
+    <aura:method name="showOrHide" access="public" action="{!c.showOrHide}" description="Show or hide this component">
+        <!--If show is true then component's content is displayed, otherwise is hidden-->
+        <aura:attribute name="show" type="Boolean" />
+    </aura:method>
+
+    <aura:method name="getUserName" access="public" action="{!c.getUserName}" description="Returns current record CreatedBy.Name field" />
+
+    <li aura:id="presenceContainer" role="presentation" class="slds-listbox__item">
+        <div id="listbox-option-id-1"
+             class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+             role="option">
+
+          <span class="slds-media__figure">
+            <span class="slds-icon_container slds-icon-utility-user">
+              <lightning:icon iconName="utility:user"/>
+            </span>
+          </span>
+
+          <span class="slds-media__body">
+            <span class="slds-listbox__option-text slds-listbox__option-text_entity">
+                    {!v.userPresence.CreatedBy.Name}</span>
+          </span>
+
+        </div>
+    </li>
+
+</aura:component>

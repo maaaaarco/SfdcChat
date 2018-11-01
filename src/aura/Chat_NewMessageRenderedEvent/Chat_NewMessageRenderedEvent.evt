@@ -1,0 +1,8 @@
+<!--
+ - Created by mzeuli on 25.10.18.
+ -->
+
+<aura:event type="COMPONENT" description="Chat_NewMessageRenderedEvent">
+    <aura:attribute name="messageId" type="String" description="Id of the record displayed" />
+    <aura:attribute name="messageName" type="String" description="Name of the record displayed" />
+</aura:event>

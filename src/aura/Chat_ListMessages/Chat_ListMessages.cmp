@@ -1,0 +1,63 @@
+<!--
+ - Created by mzeuli on 24.10.18.
+ - Display a list of messages and listen for new ones
+ -->
+
+<aura:component description="Chat_ListMessages" controller="Chat_CtrListMessages">
+
+    <aura:dependency resource="markup://c:Chat_SingleMessage"/>
+
+    <aura:registerEvent name="alert" type="c:AlertEvent" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="newMessage" event="c:StreamerEvent" action="{!c.onNewMessage}"/>
+    <aura:handler name="messageRendered" event="c:Chat_NewMessageRenderedEvent" action="{!c.onMessageRendered}"/>
+
+    <!--required-->
+    <aura:attribute name="roomId" type="String" required="true" description="Chat room id"/>
+    <aura:attribute name="chatPaneSize" type="Integer" required="true" description="Chat pane size in pixel"/>
+    <aura:attribute name="currentUser" type="User" required="true" description="Current user record"/>
+
+    <!--optional-->
+    <aura:attribute name="chunkSize" type="Integer" default="30"
+                    description="Number of messages to retrieve in a single chunk"/>
+    <aura:attribute name="streamingChannel" type="String" description="Streaming channel to listen to"
+                    default="NewChatMessage"/>
+
+    <!--private -->
+    <aura:attribute name="offset" type="Integer" access="private"
+                    description="Used to load older messages, together with chunkSize implements pagination"/>
+    <aura:attribute name="chatScrollHeight" type="Integer" access="private"
+                    description="Stores scroll height property of messages' container"/>
+    <aura:attribute name="chatScrollTop" type="Integer" access="private"
+                    description="Stores scroll top property of messages' container"/>
+    <aura:attribute name="oldestMessageName" type="String" access="private"
+                    description="Contains the name of oldest message displayed. Used to determine whether to scroll or not the container"/>
+    <aura:attribute name="showLoadMore" type="Boolean" access="private" description="Show or hide the Load More link"
+                    default="true"/>
+
+    <div aura:id="chatScroller" class="slds-scrollable--y" style="{!'height:' + v.chatPaneSize + 'px'}"
+         onscroll="{!c.onChatScroll}">
+        <div class="slds-grid slds-wrap">
+
+            <aura:renderIf isTrue="{!v.showLoadMore}">
+                <div class="slds-col slds-size--1-of-1">
+                    <div class="slds-align_absolute-center">
+                        <a href="#" onclick="{!c.loadMore}">Load More</a>
+                    </div>
+                </div>
+            </aura:renderIf>
+
+            <div class="slds-col slds-size--1-of-1">
+                <section role="log" class="slds-chat">
+                    <ul aura:id="messagesContainer" class="slds-chat-list">
+                        <!--dynamically filled by controller-->
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!--streaming api connector-->
+    <c:Streamer channelName="{!v.streamingChannel}" isPushTopic="true" debugMode="true"/>
+</aura:component>

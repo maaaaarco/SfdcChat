@@ -1,0 +1,36 @@
+<!--
+ - Created by mzeuli on 24.10.18.
+ - Displays a single message
+ -->
+
+<aura:component description="Chat_SingleMessage">
+
+    <aura:registerEvent name="messageRendered" type="c:Chat_NewMessageRenderedEvent" />
+
+    <aura:handler name="render" value="{!this}" action="{!c.onRender}" />
+
+    <!--required-->
+    <aura:attribute name="message" type="Chat_Message__c" required="true" description="Chat_Message__c record to display"/>
+    <aura:attribute name="currentUserId" type="String" required="true" description="Current user id" />
+
+    <!--optional-->
+    <aura:attribute name="displayDate" type="Boolean" default="true" description="True if has to display user's name and date under message's text"/>
+
+    <li aura:id="msgContainer" id="{!v.message.Name}" class="{!if(v.message.CreatedById == v.currentUserId, 'slds-chat-listitem slds-chat-listitem_outbound', 'slds-chat-listitem slds-chat-listitem_inbound')}">
+        <div class="slds-chat-message">
+            <div class="slds-chat-message__body">
+                <div class="{!if(v.message.CreatedById == v.currentUserId, 'slds-chat-message__text slds-chat-message__text_outbound', 'slds-chat-message__text slds-chat-message__text_inbound')}">
+                    <span>
+                        <lightning:formattedText value="{!v.message.Message__c}" />
+                    </span>
+                </div>
+                <aura:renderIf isTrue="{!v.displayDate}">
+                    <div class="slds-chat-message__meta">
+                        {!v.message.CreatedBy.Name} •
+                        <lightning:formattedDateTime value="{!v.message.CreatedDate}" month="short" day="2-digit" hour="2-digit" minute="2-digit" />
+                    </div>
+                </aura:renderIf>
+            </div>
+        </div>
+    </li>
+</aura:component>
