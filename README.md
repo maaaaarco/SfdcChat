@@ -72,7 +72,7 @@ component event;
 ## Installation
 
 1. At the top of this document press on "Deploy to Salesforce" button
-2. In order to be able to chat, users should have the following permissions:
+2. Grant following permissions to users:
     - Read and Create permission on Chat_Room__c, Chat_Message__c and Chat_Room__c
     - Read permission on PushTopic
  
