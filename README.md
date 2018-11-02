@@ -68,4 +68,45 @@ component event;
 component event;
 - _Chat_SendMessage:_ displays a text area where user can write a new message. When user press _Enter_ it sends the message;
 
+## Installation
 
+1. At the top of this document press on "Deploy to Salesforce" button
+2. In order to be able to chat, users should have the following permissions:
+    - Read and Create permission on Chat_Room__c, Chat_Message__c and Chat_Room__c
+    - Read permission on PushTopic
+ 
+3. Create the PushTopic that listen to new Chat_Message__c records. From anonymous console run this script:
+
+    ```
+    PushTopic pushTopic = new PushTopic();
+    pushTopic.Name = 'NewChatMessage';
+    pushTopic.Query = 'SELECT Id, Name, Chat_Room__c FROM Chat_Message__c';
+    pushTopic.ApiVersion = 44.0;
+    pushTopic.NotifyForOperationCreate = true;
+    pushTopic.NotifyForOperationUpdate = false;
+    pushTopic.NotifyForOperationUndelete = false;
+    pushTopic.NotifyForOperationDelete = false;
+    pushTopic.NotifyForFields = 'Referenced';
+    insert pushTopic;
+    ```
+4. Go to any object's home page layout and add the custom component Chat_Record_Main to it
+5. Start chatting!
+
+## Considerations
+A few consideration regarding the implementation.
+
+### Streaming API limits
+These are the main two limits to consider:
+- _Maximum number of concurrent clients:_ depends on your Salesforce edition. A client is not a user but a single 
+connection to the server. If a user is chatting in two different browser tabs it counts as two! This should be solved
+using the new lightning:empApi component;
+- _Maximum number of delivered event notifications:_ depends on your Salesforce edition. Since a notification is delivered to
+a client, **not to a user**, the consideration from before applies also here (same user with two tab = two notifications).
+
+Basically the more users you have the less they can chat... Few companies might consider this as a feature!
+
+### Security
+Chat_Room__c default sharing setting is set to Public Read, this means that all users can see every chat room and every related
+message. That's AWESOME right?
+I left it like this because I still did not figure out how to restrict chat room visibility. The desired outcome
+ should be that a chat room is visible only to users that have access to the related record (identified by the sObject_Id__c field).
