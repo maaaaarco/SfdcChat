@@ -110,5 +110,5 @@ Basically the more users you have the less they can chat... Few companies might 
 ### Security
 Chat_Room__c default sharing setting is set to Public Read, this means that all users can see every chat room and every related
 message. That's AWESOME right?
-I left it like this because I still did not figure out how to restrict chat room visibility. The desired outcome
+It's like this because I still did not figure out how to restrict chat room visibility. The desired outcome
  should be that a chat room is visible only to users that have access to the related record (identified by the sObject_Id__c field).
