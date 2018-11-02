@@ -42,7 +42,7 @@ Very briefly this is my proposed solution:
 ###Data model
 This is the implemented data model
 
-<img src="https://github.com/maaaaarco/SfdcChat/tree/master/doc/images/db.png">
+<img src="https://raw.githubusercontent.com/maaaaarco/SfdcChat/master/doc/images/db.png">
 
 - _Chat_Room__c:_ represents chat rooms instances. The field sObject_Id__c, with a _unique_ constraint, stores the related 
 record's id
@@ -53,7 +53,7 @@ to a chat room
 ###Lightning components
 This is the components' structure
 
-<img src="https://github.com/maaaaarco/SfdcChat/tree/master/doc/images/components.png">
+<img src="https://raw.githubusercontent.com/maaaaarco/SfdcChat/master/doc/images/components.png">
 
 - _Chat_Record_Main:_ component to include in object's Home Page layout. Based on current record's id retrieves 
 related chat room;
