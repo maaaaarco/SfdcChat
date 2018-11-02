@@ -7,7 +7,7 @@
 
     <aura:dependency resource="markup://c:Chat_SingleMessage"/>
 
-    <aura:registerEvent name="alert" type="c:AlertEvent" />
+    <aura:registerEvent name="alert" type="c:AlertEvent"/>
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <aura:handler name="newMessage" event="c:StreamerEvent" action="{!c.onNewMessage}"/>
@@ -56,6 +56,12 @@
                 </section>
             </div>
         </div>
+    </div>
+
+    <div class="slds-align--absolute-center">
+        <button aura:id="jumpToBottomBtn" class="slds-button slds-button_icon slds-button_icon-container slds-hide" title="Jump to bottom" onclick="{!c.jumpToLastMessage}">
+            <lightning:icon iconName="utility:jump_to_bottom" size="x-small"/>
+        </button>
     </div>
 
     <!--streaming api connector-->

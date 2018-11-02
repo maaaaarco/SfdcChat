@@ -3,6 +3,15 @@
  */
 ({
     /**
+     * Returns jump to bottom button's container
+     * @param component
+     * @returns Button's container
+     */
+    getJumpToBottomComponent: function(component) {
+        return component.find("jumpToBottomBtn");
+    },
+
+    /**
      * Returns messages container component
      * @param component Current component
      * @returns Messages' container component

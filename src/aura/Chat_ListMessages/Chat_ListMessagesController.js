@@ -11,7 +11,7 @@
 
     /**
      * Called when user scrolls messages container, saves the element scrollHeight
-     * and scrollTop properties
+     * and scrollTop properties. Checks also if to show/hide the jump to bottom button
      * @param component
      * @param event
      * @param helper
@@ -19,6 +19,30 @@
     onChatScroll: function (component, event, helper) {
         component.set("v.chatScrollHeight", event.target.scrollHeight);
         component.set("v.chatScrollTop", event.target.scrollTop);
+
+        const scroller = helper.getChatScrollerComponent(component).getElement();
+        const btn = helper.getJumpToBottomComponent(component);
+
+        if (Math.abs(scroller.scrollHeight - scroller.clientHeight) - scroller.scrollTop >= 100) {
+            $A.util.removeClass(btn, "slds-hide");
+        } else {
+            $A.util.addClass(btn, "slds-hide");
+        }
+    },
+
+    /**
+     * Jump to last message in conversation
+     * @param component
+     * @param event
+     * @param helper
+     */
+    jumpToLastMessage: function(component, event, helper) {
+        const btn = helper.getJumpToBottomComponent(component);
+        const scroller = helper.getChatScrollerComponent(component).getElement();
+        scroller.scrollTop = scroller.scrollHeight;
+        $A.util.addClass(btn, "slds-hide");
+        // updates current scrollTop position
+        component.set("v.chatScrollTop", scroller.scrollTop);
     },
 
     /**
