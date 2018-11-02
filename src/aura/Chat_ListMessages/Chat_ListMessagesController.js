@@ -86,7 +86,7 @@
             // first load
             !component.get("v.chatScrollHeight")
             // previous focus was at the bottom of the chat
-            || component.get("v.chatScrollHeight") - scroller.scrollTop === scroller.clientHeight
+            || component.get("v.chatScrollHeight") - component.get("v.chatScrollTop") === scroller.clientHeight
         );
 
         const oldestMessageNameDisplayed = component.get("v.oldestMessageName");
@@ -111,8 +111,9 @@
             scroller.scrollTop = scroller.scrollHeight - component.get("v.chatScrollHeight");
         }
 
-        // updates scrollHeight
+        // updates scrollHeight and scrollTop
         component.set("v.chatScrollHeight", scroller.scrollHeight);
+        component.set("v.chatScrollTop", scroller.scrollTop);
 
         // updates oldest message displayed
         if (isOlderMessage) {

@@ -35,7 +35,7 @@
     <div class="slds-grid slds-wrap slds-p-around--small">
         <div class="slds-col slds-size--1-of-1">
 
-            <button aura:id="triggerBtn" class="slds-button slds-button_icon slds-button_icon-border-filled"
+            <button aura:id="triggerBtn" class="slds-button slds-button_icon"
                     title="Online users" onmousedown="{!c.togglePopover}">
                 <lightning:icon iconName="utility:people"/>
             </button>

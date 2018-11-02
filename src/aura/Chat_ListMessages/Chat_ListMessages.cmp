@@ -43,7 +43,7 @@
             <aura:renderIf isTrue="{!v.showLoadMore}">
                 <div class="slds-col slds-size--1-of-1">
                     <div class="slds-align_absolute-center">
-                        <a href="#" onclick="{!c.loadMore}">Load More</a>
+                        <a href="#" onclick="{!c.loadMore}">Load older messages</a>
                     </div>
                 </div>
             </aura:renderIf>

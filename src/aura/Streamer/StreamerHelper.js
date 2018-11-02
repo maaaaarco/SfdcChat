@@ -73,7 +73,7 @@
             let self = this;
 
             conn.connect(function (err) {
-                if (!err) {
+                if (err) {
                     self.fireAlert(component, "Unable to connect to streaming api, chat won't work");
                     return;
                 }
