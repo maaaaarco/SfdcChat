@@ -73,8 +73,8 @@ component event;
 
 1. At the top of this document press on "Deploy to Salesforce" button
 2. Grant following permissions to users:
-    - Read and Create permission on Chat_Room__c, Chat_Message__c and Chat_Room__c
-    - Read permission on PushTopic
+    - Read and Create on Chat_Room__c, Chat_Message__c and Chat_Room__c
+    - Read on PushTopic
  
 3. Create the PushTopic that listen to new Chat_Message__c records. From anonymous console run this script:
 
