@@ -20,6 +20,7 @@ Users must be able to:
 1. send new messages 
 2. receive messages from other users
 3. checks who's online in the chat room
+4. Load all messages in the chat room
 
 It should be possible to include the chat room directly on any object's home page layout. Chat rooms must be record 
 specific, meaning that if a user sends a message while viewing record with Id#1, only users viewing the same record will 
@@ -97,6 +98,7 @@ A few consideration regarding the implementation.
 
 ### Streaming API limits
 These are the main two limits to consider:
+
 - _Maximum number of concurrent clients:_ depends on your Salesforce edition. A client is not a user but a single 
 connection to the server. If a user is chatting in two different browser tabs it counts as two! This should be solved
 using the new lightning:empApi component;
