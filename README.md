@@ -6,14 +6,14 @@ A native Salesforce chat room application.
        src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
 </a>
 
-##Introduction
+## Introduction
 Does a native Salesforce chat room application sounds like complete crazy and totally senseless project? Well that's 
 because IT IS! This project is absolute nonsense, its only purpose was to force me to take a deep (_very very deep_) 
 dive into Lightning development.
 
 No one in his mind should NEVER EVER consider something like this!
 
-##Problem Statement
+## Problem Statement
 Create a chat room application accessible by internal users of a Salesforce Organization. 
 Users must be able to:
 
@@ -31,7 +31,7 @@ allow in future. A single message cannot contain more than 260 characters. This 
 
 The application cannot rely on any third party system external to Salesforce and should be Lightning ready.
 
-##Solution
+## Solution
 Very briefly this is my proposed solution:
 
 - Lightning components for the UI
@@ -39,7 +39,7 @@ Very briefly this is my proposed solution:
 - Three custom objects to store chat rooms, messages and active users inside a chat room
 - Streaming API to broadcast messages inside a chat room
 
-###Data model
+### Data model
 This is the implemented data model
 
 <img src="https://raw.githubusercontent.com/maaaaarco/SfdcChat/master/doc/images/db.png">
@@ -50,7 +50,7 @@ record's id
 - _Chat_User_Presence__c:_ related in Master-Detail with Chat_Room__c it's used to store a list of users currently connected
 to a chat room
 
-###Lightning components
+### Lightning components
 This is the components' structure
 
 <img src="https://raw.githubusercontent.com/maaaaarco/SfdcChat/master/doc/images/components.png">
