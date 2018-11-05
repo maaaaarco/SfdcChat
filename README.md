@@ -17,8 +17,6 @@ A native Salesforce chat room application.
     - [Streaming API limits](#streaming-api-cons)
     - [Security](#security-cons)
 
-
-
 ## Introduction <a name="introduction"></a>
 Does a native Salesforce chat room application sounds like complete crazy and totally senseless project? Well that's 
 because IT IS! This project is absolute nonsense, its only purpose was to force me to take a deep (_very very deep_) 
