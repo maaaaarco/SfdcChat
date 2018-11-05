@@ -7,8 +7,15 @@ A native Salesforce chat room application.
 </a>
 
 # Index
-- [Introduction] (#introduction)
-- [Problem Statement] (#problem-statement)
+- [Introduction](#introduction)
+- [Problem Statement](#problem-statement)
+- [Solution](#solution)
+    - [Data Model](#data-model)
+    - [Lightning components](#lightning-components)
+- [Installation](#installation)
+- [Considerations](#considerations)
+    - [Streaming API limits](#streaming-api-cons)
+    - [Security](#security-cons)
 
 
 
@@ -38,7 +45,7 @@ allow in future. A single message cannot contain more than 260 characters. This 
 
 The application cannot rely on any third party system external to Salesforce and should be Lightning ready.
 
-## Solution
+## Solution <a name="solution"></a>
 Very briefly this is my proposed solution:
 
 - Lightning components for the UI
@@ -46,7 +53,7 @@ Very briefly this is my proposed solution:
 - Three custom objects to store chat rooms, messages and active users inside a chat room
 - Streaming API to broadcast messages inside a chat room
 
-### Data model
+### Data model <a name="data-model"></a>
 This is the implemented data model
 
 <img src="https://raw.githubusercontent.com/maaaaarco/SfdcChat/master/doc/images/db.png">
@@ -57,7 +64,7 @@ record's id
 - _Chat_User_Presence__c:_ related in Master-Detail with Chat_Room__c it's used to store a list of users currently connected
 to a chat room
 
-### Lightning components
+### Lightning components <a name="lightning-components"></a>
 This is the components' structure
 
 <img src="https://raw.githubusercontent.com/maaaaarco/SfdcChat/master/doc/images/components.png">
@@ -75,7 +82,7 @@ component event;
 component event;
 - _Chat_SendMessage:_ displays a text area where user can write a new message. When user press _Enter_ it sends the message;
 
-## Installation
+## Installation <a name="installation"></a>
 
 1. At the top of this document press on "Deploy to Salesforce" button
 2. Grant following permissions to users:
@@ -99,10 +106,10 @@ component event;
 4. Go to any object's home page layout and add the custom component Chat_Record_Main to it
 5. Start chatting!
 
-## Considerations
+## Considerations <a name="considerations"></a>
 A few consideration regarding the implementation.
 
-### Streaming API limits
+### Streaming API limits <a name="streaming-api-cons"></a>
 These are the main two limits to consider:
 
 - _Maximum number of concurrent clients:_ depends on your Salesforce edition. A client is not a user but a single 
@@ -113,7 +120,7 @@ a client, **not to a user**, the consideration from before applies also here (sa
 
 Basically the more users you have the less they can chat... Few companies might consider this as a feature!
 
-### Security
+### Security <a name="security-cons"></a>
 Chat_Room__c default sharing setting is set to Public Read, this means that all users can see every chat room and every related
 message. That's AWESOME right?
 It's like this because I still did not figure out how to restrict chat room visibility. The desired outcome
