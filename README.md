@@ -6,14 +6,20 @@ A native Salesforce chat room application.
        src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
 </a>
 
-## Introduction
+# Index
+- [Introduction] (#introduction)
+- [Problem Statement] (#problem-statement)
+
+
+
+## Introduction <a name="introduction"></a>
 Does a native Salesforce chat room application sounds like complete crazy and totally senseless project? Well that's 
 because IT IS! This project is absolute nonsense, its only purpose was to force me to take a deep (_very very deep_) 
 dive into Lightning development.
 
 No one in his mind should NEVER EVER consider something like this!
 
-## Problem Statement
+## Problem Statement <a name="problem-statement"></a>
 Create a chat room application accessible by internal users of a Salesforce Organization. 
 Users must be able to:
 
