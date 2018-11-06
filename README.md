@@ -18,11 +18,9 @@ A native Salesforce chat room application.
     - [Security](#security-cons)
 
 ## Introduction <a name="introduction"></a>
-Does a native Salesforce chat room application sounds like complete crazy and totally senseless project? Well that's 
-because IT IS! This project is absolute nonsense, its only purpose was to force me to take a deep (_very very deep_) 
-dive into Lightning development.
-
-No one in his mind should NEVER EVER consider something like this!
+Does a native Salesforce chat room application sounds a bit crazy and senseless project? Well... That's 
+because it _actually is!_ The only purpose here was to force me to take a deep (_very very deep_) dive into 
+Lightning development. I wanted to implement something more complex than trailhead's exercises. 
 
 ## Problem Statement <a name="problem-statement"></a>
 Create a chat room application accessible by internal users of a Salesforce Organization. 
@@ -116,10 +114,9 @@ using the new lightning:empApi component;
 - _Maximum number of delivered event notifications:_ depends on your Salesforce edition. Since a notification is delivered to
 a client, **not to a user**, the consideration from before applies also here (same user with two tab = two notifications).
 
-Basically the more users you have the less they can chat... Few companies might consider this as a feature!
+Basically the more users you have the less they can chat... I'll leave further considerations to you.
 
 ### Security <a name="security-cons"></a>
 Chat_Room__c default sharing setting is set to Public Read, this means that all users can see every chat room and every related
-message. That's AWESOME right?
-It's like this because I still did not figure out how to restrict chat room visibility. The desired outcome
+message. It's like this because I still did not figure out how to restrict chat room visibility. The desired outcome
  should be that a chat room is visible only to users that have access to the related record (identified by the sObject_Id__c field).
