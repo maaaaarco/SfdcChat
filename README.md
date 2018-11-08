@@ -1,5 +1,5 @@
-# SfdcChat
-A native Salesforce chat room application.
+# Description
+A native Salesforce chat room application built using Lightning Components.
 
 <a href="https://githubsfdeploy.herokuapp.com?owner=maaaaarco&repo=SfdcChat&ref=master">
   <img alt="Deploy to Salesforce"
