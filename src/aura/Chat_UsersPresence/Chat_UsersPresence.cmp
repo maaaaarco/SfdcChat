@@ -7,6 +7,8 @@
 
     <aura:registerEvent name="alert" type="c:AlertEvent" />
 
+    <!-- a new comment -->
+
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     <aura:handler name="render" value="{!this}" action="{!c.doRender}"/>
     <aura:handler name="change" value="{!v.searchText}" action="{!c.filterUsers}"/>
